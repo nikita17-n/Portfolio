@@ -1,0 +1,341 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.name }} | Portfolio</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+
+<body>
+
+<!-- Animated Background -->
+<div class="bg-animation">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="mesh mesh-1"></div>
+    <div class="mesh mesh-2"></div>
+</div>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+    <div class="nav-content">
+        <h2 class="logo">{{ profile.name }}</h2>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="mobile-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== HERO SECTION ===== -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-text" data-aos="fade-right">
+            <div class="hero-badge">Welcome to my portfolio</div>
+            <h1>Hello, I'm <span class="gradient-text">{{ profile.name }}</span></h1>
+            <h3 class="typing-text">{{ profile.title }}</h3>
+            <p>{{ profile.summary }}</p>
+            <div class="hero-btns">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">5+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">20+</span>
+                    <span class="stat-label">Projects</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Awards</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual" data-aos="fade-left">
+            <div class="profile-wrapper">
+                <div class="profile-glow"></div>
+                <div class="profile-frame">
+                    <img src="{{ profile.image.url }}" alt="{{ profile.name }}">
+                </div>
+                <div class="floating-badge badge-1">
+                    <i class="fas fa-code"></i>
+                    <span>Developer</span>
+                </div>
+                <div class="floating-badge badge-2">
+                    <i class="fas fa-brain"></i>
+                    <span>AI/ML</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-indicator">
+        <span>Scroll Down</span>
+        <div class="mouse">
+            <div class="wheel"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" class="section">
+    <div class="section-header" data-aos="fade-up">
+        <span class="section-subtitle">Get to know me</span>
+        <h2 class="section-title">About Me</h2>
+    </div>
+    <div class="about-content">
+        <div class="about-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="about-icon">
+                <i class="fas fa-user"></i>
+            </div>
+            <p>{{ profile.summary }}</p>
+        </div>
+        <div class="social-container" data-aos="fade-up" data-aos-delay="200">
+            <a href="https://github.com/nikita17-n" target="_blank" class="social-btn github">
+                <i class="fab fa-github"></i>
+                <span>GitHub</span>
+            </a>
+            <a href="https://linkedin.com/in/nikita-sharma-158545312/" target="_blank" class="social-btn linkedin">
+                <i class="fab fa-linkedin-in"></i>
+                <span>LinkedIn</span>
+            </a>
+            <a href="https://instagram.com/_winter._7" target="_blank" class="social-btn instagram">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+            <a href="mailto:{{ profile.email }}" class="social-btn email">
+                <i class="fas fa-envelope"></i>
+                <span>Email</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== EDUCATION ===== -->
+{% if education %}
+<section id="education" class="section dark-section">
+    <div class="section-header" data-aos="fade-up">
+        <span class="section-subtitle">My background</span>
+        <h2 class="section-title">Education</h2>
+    </div>
+    <div class="timeline">
+        {% for edu in education %}
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="{{ forloop.counter }}00">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <div class="timeline-date"><i class="fas fa-calendar"></i> 2020 - Present</div>
+                <h3>{{ edu.degree }}</h3>
+                <p class="timeline-institute">{{ edu.institute }}</p>
+                {% if edu.percentage %}
+                <div class="timeline-grade">
+                    <span class="grade-label">Grade:</span>
+                    <span class="grade-value">{{ edu.percentage }}</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<!-- ===== SKILLS ===== -->
+<section id="skills" class="section">
+    <div class="section-header" data-aos="fade-up">
+        <span class="section-subtitle">What I can do</span>
+        <h2 class="section-title">Skills</h2>
+    </div>
+    <div class="skills-container">
+        {% for skill in skills %}
+        <div class="skill-item" data-aos="fade-up" data-aos-delay="{{ forloop.counter }}50">
+            <div class="skill-icon">
+                <i class="fas fa-code"></i>
+            </div>
+            <div class="skill-info">
+                <h4>{{ skill.name }}</h4>
+                <span class="skill-category">{{ skill.category }}</span>
+            </div>
+            <div class="skill-progress">
+                <div class="progress-bar" style="width: 0%" data-progress="85"></div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section id="projects" class="section dark-section">
+    <div class="section-header" data-aos="fade-up">
+        <span class="section-subtitle">My work</span>
+        <h2 class="section-title">Projects</h2>
+    </div>
+    <div class="projects-grid">
+        {% for project in projects %}
+        <div class="project-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter }}100">
+            <div class="project-content">
+                <div class="project-number">0{{ forloop.counter }}</div>
+                <h3>{{ project.name }}</h3>
+                <p>{{ project.description }}</p>
+                <a href="{{ project.link }}" target="_blank" class="project-link">
+                    <span>View Project</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="project-glow"></div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="section">
+    <div class="section-header" data-aos="fade-up">
+        <span class="section-subtitle">Let's connect</span>
+        <h2 class="section-title">Contact Me</h2>
+    </div>
+    <div class="contact-wrapper">
+        <div class="contact-info-cards" data-aos="fade-right">
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="contact-details">
+                    <span class="contact-label">Email</span>
+                    <a href="mailto:{{ profile.email }}">{{ profile.email }}</a>
+                </div>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <div class="contact-details">
+                    <span class="contact-label">Phone</span>
+                    <a href="tel:{{ profile.phone }}">{{ profile.phone }}</a>
+                </div>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="contact-details">
+                    <span class="contact-label">Location</span>
+                    <span>India</span>
+                </div>
+            </div>
+        </div>
+        <div class="contact-form-container" data-aos="fade-left">
+            <form method="POST" class="contact-form">
+                {% csrf_token %}
+                {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                    <div class="alert success">
+                        <i class="fas fa-check-circle"></i>
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" placeholder="Your Message" required></textarea>
+                    <i class="fas fa-comment"></i>
+                </div>
+                <button type="submit" class="btn btn-submit">
+                    <span>Send Message</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-brand">
+            <h3>{{ profile.name }}</h3>
+            <p>{{ profile.title }}</p>
+        </div>
+        <div class="footer-social">
+            <a href="https://github.com/nikita17-n" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/nikita-sharma-158545312/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://instagram.com/_winter._7" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p class="copyright">© 2026 {{ profile.name }}. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- AOS Animation Library -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    // Initialize AOS animations
+    AOS.init({
+        duration: 800,
+        easing: 'ease-out',
+        once: true,
+        offset: 100
+    });
+
+    // Animate skill progress bars
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const bars = entry.target.querySelectorAll('.progress-bar');
+                bars.forEach(bar => {
+                    const progress = bar.dataset.progress;
+                    setTimeout(() => {
+                        bar.style.width = progress + '%';
+                    }, 300);
+                });
+            }
+        });
+    });
+
+    document.querySelectorAll('.skills-container').forEach(el => observer.observe(el));
+
+    // Mobile menu toggle
+    document.querySelector('.mobile-toggle').addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.toggle('active');
+        document.querySelector('.mobile-toggle').classList.toggle('active');
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
+
